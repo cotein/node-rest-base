@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors')
+const {dbConnection} = require('../database/config');
+
 class Server {
 
     constructor(){
@@ -20,9 +22,16 @@ class Server {
 
         //parseo de json
         this.app.use(express.json());
-        
+
+        //db connection
+
+        this.dataBaseConnection();
         //Directorio Público
         this.app.use(express.static('public'));
+    }
+
+    async dataBaseConnection(){
+        await dbConnection()
     }
 
     listen(){
