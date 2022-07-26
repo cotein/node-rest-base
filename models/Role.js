@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-const RoleSchema = ({
+const RoleSchema = Schema({
 
     role : {
         type : String,

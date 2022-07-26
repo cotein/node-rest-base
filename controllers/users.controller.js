@@ -3,13 +3,26 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 
-const usersGet = (req, res = response) => {
+const usersGet = async (req, res = response) => {
 
-    const {page, limit, q} = req.query;
-    res.json({
-        msg : "get API - Controller",
-        page, limit, q
-    });
+    const activeUsers = {status : true};
+    //const {page, limit, q} = req.query;
+    const {limit = 5, desde = 0} = req.query;
+
+    /* const users = await User.find(activeUsers)
+        .skip(Number(desde))
+        .limit(Number(limit));
+
+    const total = await User.countDocuments(activeUsers); */
+
+    const [total, users] = await Promise.all([
+        User.countDocuments(activeUsers),
+        User.find(activeUsers)
+            .skip(Number(desde))
+            .limit(Number(limit))
+    ])
+
+    res.json({ total, users });
 }
 
 const usersPost = async (req, res = response) => {
@@ -23,24 +36,35 @@ const usersPost = async (req, res = response) => {
     user.password = bcrypt.hashSync(body.password, salt);
     await user.save();
 
-    res.json({
-        user,
-    });
+    res.json(user);
 }
 
-const usersPut = (req, res = response) => {
+const usersPut = async (req, res = response) => {
 
     const {id} = req.params;
 
-    res.json({
-        msg : "put API - Controller",
-        'id' : id
-    });
+    const {_id, password, google, email, ...resto} = req.body;
+
+    if (password) {
+        const salt = bcrypt.genSaltSync();
+        resto.password = bcrypt.hashSync(body.password, salt);
+    }
+
+    const user = await User.findByIdAndUpdate(id, resto)
+
+    res.json(user);
 }
 
-const usersDelete = (req, res = response) => {
+const usersDelete = async(req, res = response) => {
+
+    const {id} = req.params;
+    //borrado físico
+    //const user = await User.findByIdAndDelete(id)
+
+    const user = await User.findByIdAndUpdate(id, {status : false});
+    
     res.json({
-        msg : "delete API - Controller"
+        user
     });
 }
 
