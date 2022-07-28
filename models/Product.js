@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-const CategorySchema = Schema({
+const ProductSchema = Schema({
 
     name : {
         type : String,
@@ -17,13 +17,18 @@ const CategorySchema = Schema({
         ref : 'User',
         required : true
     },
-    products:   [
+    price : {
+        type : Number,
+        default : 0
+    },
+    categories: [
         { 
             type: Schema.Types.ObjectId,
-            ref: 'Product',
-            required : false
+            ref: 'Category',
+            required : true 
         }
     ],
+
 })
 
-module.exports = model('Category', CategorySchema);
+module.exports = model('Product', ProductSchema);
