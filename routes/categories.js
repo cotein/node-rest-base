@@ -27,7 +27,7 @@ router.get('/:id', [
 //crear una categoria - privado - cualquier rol
 router.post('/', [
     validateJWT,
-    check('id').custom(ExistsCategoryById),
+    //check('id').custom(ExistsCategoryById),
     check('name', "El nombre es obligatotio").not().isEmpty(),
     fieldValidation
 ], createCategory);

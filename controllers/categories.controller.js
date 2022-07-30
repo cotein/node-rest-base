@@ -1,24 +1,22 @@
 const {response} = require('express');
+const { ExistItemOnDataBase } = require('../helpers/db-validators');
 const {Category} = require('../models');
 
 const createCategory = async (req, res = response) => {
 
+    console.log('req.authUser')
+    console.log(req.authUser)
+    console.log('req.authUser')
     const name = req.body.name.toUpperCase();
 
     const existsCategory = await Category.findOne({name});
 
-    if ( existsCategory) {
-        return res.status(400).json({
-            msg : `La categorìa ${existsCategory.name}, ya existe`
-        })
-    }
-
+    ExistItemOnDataBase(existsCategory, res)
     //Crear categoria
     const data = {
         name,
         user : req.authUser._id
     }
-
     const newCategory = new Category(data);
 
     await newCategory.save();
