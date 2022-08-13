@@ -40,6 +40,10 @@ class Server {
         await dbConnection()
     }
 
+    getServer(){
+        return this.app;
+    }
+
     listen(){
         this.app.listen(this.port, ()=>{
             console.log('Servidor corriendo en', this.port)
