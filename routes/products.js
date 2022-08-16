@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { fieldValidation, isAdminRole, validateJWT} = require('../middlewares');
 const { response } = require('express');
-const Afip = require('@afipsdk/afip.js');
+
 const { createProduct, getProduct, getAllActiveProducts } = require('../controllers/product.controller');
 const { ExistsProductById } = require('../helpers/db-validators');
 

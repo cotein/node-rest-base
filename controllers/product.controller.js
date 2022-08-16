@@ -1,6 +1,7 @@
 const {response} = require('express');
 const { ExistItemOnDataBase } = require('../helpers/db-validators');
 const {Product} = require('../models');
+const Afip = require('@afipsdk/afip.js');
 
 const createProduct = async (req, res = response) => {
 
