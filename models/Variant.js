@@ -1,10 +1,10 @@
 const {Schema, model} = require('mongoose');
 
-const CategorySchema = Schema({
+const VariantSchema = Schema({
 
-	name : {
+	variant : {
 		type : String,
-		required : [true, 'El nombre es obligatorio'],
+		required : [true, 'La variante es obligatoria'],
 		unique : true
 	},
 	status : {
@@ -24,7 +24,12 @@ const CategorySchema = Schema({
 			required : false
 		}
 	],
+	sku: {
+		type: String,
+		required: false,
+		default: ''
+	},
 	createdat : { type : Date, default: Date.now }
 });
 
-module.exports = model('Category', CategorySchema);
+module.exports = model('Variant', VariantSchema);

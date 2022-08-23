@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-const CategorySchema = Schema({
+const PriceListSchema = Schema({
 
 	name : {
 		type : String,
@@ -12,11 +12,6 @@ const CategorySchema = Schema({
 		default : true,
 		required : [true, 'El estado es obligatorio']
 	},
-	user : {
-		type : Schema.Types.ObjectId,
-		ref : 'User',
-		required : true
-	},
 	products:   [
 		{ 
 			type: Schema.Types.ObjectId,
@@ -27,4 +22,4 @@ const CategorySchema = Schema({
 	createdat : { type : Date, default: Date.now }
 });
 
-module.exports = model('Category', CategorySchema);
+module.exports = model('PriceList', PriceListSchema);

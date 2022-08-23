@@ -25,7 +25,14 @@ const ProductSchema = Schema({
 		{ 
 			type: Schema.Types.ObjectId,
 			ref: 'Category',
-			required : true 
+			required : [true, 'La categoría es obligatoria'] 
+		}
+	],
+	priceLists: [
+		{ 
+			type: Schema.Types.ObjectId,
+			ref: 'PriceList',
+			required : [true, 'Lista de precios es obligatoria'] 
 		}
 	],
 	description : {
@@ -77,7 +84,7 @@ const ProductSchema = Schema({
 		required: false,
 		default: false
 	},
-
+	createdat : { type : Date, default: Date.now }
 });
 
 module.exports = model('Product', ProductSchema);

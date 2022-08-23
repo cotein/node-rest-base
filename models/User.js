@@ -31,6 +31,7 @@ const UserSchema = Schema({
 		type : Boolean,
 		default : true
 	},
+	createdat : { type : Date, default: Date.now }
 });
 
 UserSchema.methods.toJSON = function(){
