@@ -12,13 +12,6 @@ const PriceListSchema = Schema({
 		default : true,
 		required : [true, 'El estado es obligatorio']
 	},
-	products:   [
-		{ 
-			type: Schema.Types.ObjectId,
-			ref: 'Product',
-			required : false
-		}
-	],
 	createdat : { type : Date, default: Date.now }
 });
 
