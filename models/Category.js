@@ -1,7 +1,6 @@
 const {Schema, model} = require('mongoose');
 
 const CategorySchema = Schema({
-
 	name : {
 		type : String,
 		required : [true, 'El nombre es obligatorio'],
@@ -17,13 +16,19 @@ const CategorySchema = Schema({
 		ref : 'User',
 		required : true
 	},
-	products:   [
+	products: [
 		{ 
 			type: Schema.Types.ObjectId,
 			ref: 'Product',
 			required : false
 		}
 	],
+	company: {
+		type: Schema.Types.ObjectId,
+		ref: 'Company',
+		required: true,
+		default: null
+	},
 	createdat : { type : Date, default: Date.now }
 });
 

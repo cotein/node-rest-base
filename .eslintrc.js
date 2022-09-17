@@ -3,7 +3,8 @@ module.exports = {
 		'browser': true,
 		'commonjs': true,
 		'es2021': true,
-		'node': true
+		'node': true,
+		'jest/globals': true
 	},
 	'extends': 'eslint:recommended',
 	'overrides': [
@@ -27,6 +28,14 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
+		],
+		'object-curly-spacing': [
+			"error", 
+			"always"
+		],
+		'space-in-parens': [
+			"error", 
+			"always"
 		]
 	}
 };

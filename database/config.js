@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const {MONGODB_ATLAS, MONGODB_ATLAS_TEST, NODE_ENV} = process.env;
 
 const connectionString = NODE_ENV==='test' 
@@ -8,8 +11,7 @@ const connectionString = NODE_ENV==='test'
 const dbConnection = async () => {
 
 	try {
-        
-		await mongoose.connect('mongodb+srv://cotein:311034@miclusterdepruebas.sxz0ijy.mongodb.net/mi_primer_db');
+		await mongoose.connect(connectionString);
 
 		console.log('Base de datos conectada');
 

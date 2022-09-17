@@ -3,7 +3,7 @@ const Afip = require('@afipsdk/afip.js');
 
 jest.setTimeout(30000);
 
-describe('Módulo de Facturación Electrónica AFIP', ()=> {
+describe.skip('Módulo de Facturación Electrónica AFIP', ()=> {
 	const afip = new Afip({ 
 		CUIT: 20233374971,
 		production : true,

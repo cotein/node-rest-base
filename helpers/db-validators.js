@@ -1,5 +1,6 @@
-const {Role, Category, Product} = require('../models');
+const {Role, Category, Product, Company} = require('../models');
 const {User} = require('../models');
+const response = require('express');
 
 const ValidRole = async (role = '') => {
 	const existsRol = await Role.findOne({role});
@@ -36,11 +37,11 @@ const ExistsProductById = async (id = '') => {
 	}
 };
 
-const ExistItemOnDataBase = (item, res) =>{
-	if ( item) {
-		return res.status(400).json({
-			msg : `${item.name}, ya existe en la base de datos.`
-		});
+const ExistCompanyOnDataBase = async (cuit, res = response) =>{
+	const existsCompany = await Company.findOne({cuit});
+	res.body;
+	if (! existsCompany ) {
+		throw new Error(`No existe un Producto con el CUIT, ${cuit}`);
 	}
 };
 
@@ -49,6 +50,6 @@ module.exports = {
 	ExistsEmail,
 	ExistsUserById,
 	ExistsCategoryById,
-	ExistItemOnDataBase,
+	ExistCompanyOnDataBase,
 	ExistsProductById
 };

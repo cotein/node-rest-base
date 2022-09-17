@@ -1,4 +1,4 @@
-const {OAuth2Client} = require('google-auth-library');
+const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -9,10 +9,13 @@ async function googleVerify(token = '') {
 		// Or, if multiple clients access the backend:
 		//[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
 	});
-	const {name, email, picture} = ticket.getPayload();
-
+	const {name,  email, picture, family_name} = ticket.getPayload();
+	console.log('ticket.getPayload()');
+	console.log(ticket.getPayload());
+	console.log('ticket.getPayload()');
 	return {
 		name,
+		lastName : family_name,
 		email,
 		img : picture //lo renombro porque así (img) lo tengo en mongo
 	};
