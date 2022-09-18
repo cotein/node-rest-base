@@ -1,18 +1,18 @@
-const {response} = require('express');
+const { response } = require('express');
 const bcrypt = require('bcryptjs');
-const {User} = require('../models');
+const { User } = require('../models');
 
 const usersGet = async (req, res = response) => {
 
-	const activeUsers = {status : true};
+	const activeUsers = { status: true };
 	//const {page, limit, q} = req.query;
-	const {limit = 5, desde = 0} = req.query;
+	const { limit = 5, desde = 0 } = req.query;
 
 	/* const users = await User.find(activeUsers)
-        .skip(Number(desde))
-        .limit(Number(limit));
+		.skip(Number(desde))
+		.limit(Number(limit));
 
-    const total = await User.countDocuments(activeUsers); */
+	const total = await User.countDocuments(activeUsers); */
 
 	const [total, users] = await Promise.all([
 		User.countDocuments(activeUsers),
@@ -40,10 +40,10 @@ const usersPost = async (req, res = response) => {
 
 const usersPut = async (req, res = response) => {
 
-	const {id} = req.params;
+	const { id } = req.params;
 
 	// eslint-disable-next-line no-unused-vars
-	const {_id, password, google, email, ...resto} = req.body;
+	const { _id, password, google, email, ...resto } = req.body;
 
 	if (password) {
 		const salt = bcrypt.genSaltSync();
@@ -55,11 +55,11 @@ const usersPut = async (req, res = response) => {
 	res.json(user);
 };
 
-const usersDelete = async(req, res = response) => {
+const usersDelete = async (req, res = response) => {
 
-	const {id} = req.params;
+	const { id } = req.params;
 
-	const user = await User.findByIdAndUpdate(id, {status : false});
+	const user = await User.findByIdAndUpdate(id, { status: false });
 
 	res.json(user);
 };

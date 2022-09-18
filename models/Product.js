@@ -84,12 +84,12 @@ const ProductSchema = Schema({
 		required: false,
 		default: false
 	},
-	company: {
+	/* company: {
 		type: Schema.Types.ObjectId,
 		ref: 'Company',
 		required: true,
 		default: null
-	},
+	}, */
 	createdat : { type : Date, default: Date.now }
 });
 

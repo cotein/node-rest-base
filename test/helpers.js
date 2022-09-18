@@ -1,8 +1,10 @@
 /* eslint-disable indent */
 const { Product, User, Company } = require('./../models');
+const bcryptjs = require('bcryptjs');
 
 const basicInitialData = async () => {
-
+	const salt = bcryptjs.genSaltSync();
+	const password = bcryptjs.hashSync("123456", salt);
 	await Product.deleteMany({});
 	await User.deleteMany({});
 	await Company.deleteMany({});
@@ -16,7 +18,7 @@ const basicInitialData = async () => {
 		name: 'Diego',
 		lastName: 'Barrueta',
 		email: 'diego.barrueta@gmail.com',
-		password: 123456,
+		password,
 		role: 'ADMIN_ROLE',
 		company: company.id,
     

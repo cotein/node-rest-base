@@ -4,3 +4,12 @@ content-type: application/json
 {
   "id_token": "John"
 }
+####
+
+POST http://localhost:8080/api/auth/login
+content-type: application/json
+
+{
+  "email" : "diego.barrueta@gmail.com",
+	"password" : "123456"
+}

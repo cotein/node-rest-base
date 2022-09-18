@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const {dbConnection} = require('../database/config');
+const { dbConnection } = require('../database/config');
 
 class Server {
 
-	constructor(){
+	constructor() {
 		this.app = express();
 		this.port = process.env.PORT;
 		this.authPath = '/api/auth';
@@ -16,7 +16,7 @@ class Server {
 		this.routes();
 	}
 
-	routes(){
+	routes() {
 		this.app.use(this.authPath, require('../routes/auth'));
 		this.app.use(this.usersPath, require('../routes/users'));
 		this.app.use(this.categorieisPath, require('../routes/categories'));
@@ -24,7 +24,7 @@ class Server {
 		this.app.use(this.companyPath, require('../routes/company'));
 	}
 
-	middlewares(){
+	middlewares() {
 
 		this.app.use(cors());
 
@@ -38,16 +38,16 @@ class Server {
 		this.app.use(express.static('public'));
 	}
 
-	async dataBaseConnection(){
+	async dataBaseConnection() {
 		await dbConnection();
 	}
 
-	getServer(){
+	getServer() {
 		return this.app;
 	}
 
-	listen(){
-		this.app.listen(this.port, ()=>{
+	listen() {
+		this.app.listen(this.port, () => {
 			console.log('Servidor corriendo en', this.port);
 		});
 	}

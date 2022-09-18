@@ -20,6 +20,11 @@ const dbConnection = async () => {
 	}
 };
 
+const dbDisconnect = async () => {
+	await mongoose.connection.close();
+}
+
 module.exports = {
-	dbConnection
+	dbConnection,
+	dbDisconnect
 };

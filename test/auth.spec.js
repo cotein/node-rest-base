@@ -10,16 +10,15 @@ describe('Auth User',  () => {
 
     it('Login with email and password ', async () => {
         const email = 'diego.barrueta@gmail.com';
-        const salt = bcryptjs.genSaltSync();
-	    const password = bcryptjs.hashSync(123456, salt);
+	    const password = "123456";
         
-        const res = await request(app).post('/api/auth/login').send({
+        const res = await request(app).post('/api/auth/login')
+        .send({
             email,
             password
         });
 
         expect(res.body).toBeInstanceOf(Object);
-        console.info(res);
         /* expect(response.body.user).toEqual(expect.objectContaining({
             name: 'Diego'
         })); */

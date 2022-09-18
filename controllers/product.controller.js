@@ -1,5 +1,5 @@
 const { response } = require('express');
-const { ExistItemOnDataBase } = require('../helpers/db-validators');
+const { ExistsProductById } = require('../helpers/db-validators');
 const { Product } = require('../models');
 const slugify = require('slugify');
 
@@ -11,7 +11,7 @@ const createProduct = async (req, res = response) => {
 
 	const slug = slugify(name);
 
-	ExistItemOnDataBase(existsProduct, res);
+	//ExistsProductById(existsProduct, res);
 
 	const data = {
 		name,
