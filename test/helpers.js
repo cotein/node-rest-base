@@ -2,17 +2,22 @@
 const { Product, User, Company } = require('./../models');
 const bcryptjs = require('bcryptjs');
 
-const basicInitialData = async () => {
-	const salt = bcryptjs.genSaltSync();
-	const password = bcryptjs.hashSync("123456", salt);
-	await Product.deleteMany({});
-	await User.deleteMany({});
-	await Company.deleteMany({});
+const createCompany = async () => {
+
 	const company = new Company({
 		name: 'Transportes Menconi',
 		cuit: '20008721123',
 	});
-	await company.save();
+
+	const newCompany = await company.save();
+
+	return newCompany;
+}
+
+const createUser = async (company) => {
+	
+	const salt = bcryptjs.genSaltSync();
+	const password = bcryptjs.hashSync("123456", salt);
 
 	const user = new User({
 		name: 'Diego',
@@ -23,7 +28,20 @@ const basicInitialData = async () => {
 		company: company.id,
     
 	});
-	await user.save();
+	
+	const newUser = await user.save();
+
+	return newUser;
+}
+const basicInitialData = async () => {
+	
+	await Product.deleteMany({});
+	await User.deleteMany({});
+	await Company.deleteMany({});
+
+	const company = await createCompany();
+
+	const user = await createUser(company);
 
     const initialProducts = [
         {
@@ -45,6 +63,7 @@ const basicInitialData = async () => {
             company: company.id
         }
     ];
+
 	initialProducts.forEach( async (product) => {
 		const prod = new Product(product);
 		await prod.save();

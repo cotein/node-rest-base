@@ -3,7 +3,6 @@ const request = require('supertest');
 const { User, Company } = require('../models');
 const Server = require('../models/Server');
 const { basicInitialData, authUser } = require('./helpers');
-const { dbDisconnect } = require('../database/config');
 
 describe('Pruebas sobre la API products', () => {
 	const server = new Server;
@@ -11,7 +10,9 @@ describe('Pruebas sobre la API products', () => {
 	const app = server.getServer();
 
 	beforeAll(async () => {
+		
 		await basicInitialData();
+
 		const email = 'diego.barrueta@gmail.com';
 	    const password = '123456'
         
@@ -62,9 +63,29 @@ describe('Pruebas sobre la API products', () => {
 			expect(resp.status).toBe(201)
 
 		});
+
+		it('Usuario no logueado no puede crear un producto', async () => {
+
+			const user = await User.findOne({ email: 'diego.barrueta@gmail.com' });
+			console.log("🚀 ~ file: product.spec.js ~ line 70 ~ it ~ user", user)
+
+			const company = await Company.findOne({ cuit: 20008721123 });
+
+			const product = {
+				name: 'otro más',
+				status: false,
+				/* user: user.id,
+				company: company.id */
+			};
+
+			const resp = await request(app).post('/api/products')
+				
+			expect(resp.body).toBeInstanceOf(Object);
+			expect(resp.body.name).toEqual('OTRO MÁS');
+			expect(resp.status).toBe(201)
+
+		});
 	});
 
-	afterAll(  () => {
-		//dbDisconnect();
-	})
+
 });
