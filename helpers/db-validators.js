@@ -32,16 +32,15 @@ const ExistsCategoryById = async (id = '') => {
 
 const ExistsProductById = async (id = '') => {
 	const existsProductById = await Product.findById(id);
-	if (!existsProductById) {
-		throw new Error(`No existe un Producto con el ID, ${id}`);
+	if (existsProductById) {
+		throw new Error(`Ya existe un Producto con el ID, ${id}`);
 	}
 };
 
-const ExistCompanyOnDataBase = async (cuit, res = response) => {
-	const existsCompany = await Company.findOne({ cuit });
-	res.body;
-	if (!existsCompany) {
-		throw new Error(`No existe un Producto con el CUIT, ${cuit}`);
+const ExistsCompanyOnDataBase = async (comapny) => {
+	const company = await Company.findOne({ name: comapny.name });
+	if (company) {
+		throw new Error(`Ya existe esta compañia en nuestros registros`);
 	}
 };
 
@@ -50,6 +49,6 @@ module.exports = {
 	ExistsEmail,
 	ExistsUserById,
 	ExistsCategoryById,
-	ExistCompanyOnDataBase,
+	ExistsCompanyOnDataBase,
 	ExistsProductById
 };

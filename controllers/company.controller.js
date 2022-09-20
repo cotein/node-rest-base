@@ -1,5 +1,6 @@
 const { response } = require('express');
-const { ExistCompanyOnDataBase } = require('../helpers/db-validators');
+const { ExistsCompanyOnDataBase } = require('../helpers/db-validators');
+
 const { Company } = require('../models');
 const Inscription = require('../models/Inscription');
 
@@ -7,18 +8,17 @@ const createCompany = async (req, res = response) => {
 
 	const name = req.body.name.toUpperCase();
 	const cuit = req.body.cuit;
-	const inscription = await Inscription.findOne({ name });
-	const existsCompany = await Company.findOne({ cuit });
-
-	ExistCompanyOnDataBase(existsCompany, res);
+	//const inscription = await Inscription.findOne({ name });
 
 	const data = {
 		name,
 		cuit,
-		inscription,
+		//inscription,
 		user: req.authUser._id,
 		status: true
 	};
+	
+	ExistsCompanyOnDataBase(data.name);
 
 	const newCompany = new Company(data);
 
@@ -26,7 +26,6 @@ const createCompany = async (req, res = response) => {
 
 	res.status(201).json(newCompany);
 };
-
 
 const getCompany = async (req, res = response) => {
 

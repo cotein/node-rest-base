@@ -8,10 +8,11 @@ const createProduct = async (req, res = response) => {
 	const name = req.body.name.toUpperCase();
 
 	const existsProduct = await Product.findOne({ name });
-
+	console.log("🚀 ~ file: product.controller.js ~ line 11 ~ createProduct ~ existsProduct", existsProduct)
+	
 	const slug = slugify(name);
 
-	//ExistsProductById(existsProduct, res);
+	ExistsProductById(existsProduct);
 
 	const data = {
 		name,
@@ -44,12 +45,14 @@ const getAllActiveProducts = async (req, res = response) => {
 			.skip(Number(desde))
 			.limit(Number(limit))
 	]);
+
 	res.json({ total, products });
 };
 
 const getProduct = async (req, res = response) => {
 
 	const { id } = req.params;
+	
 	const product = await Product.findById(id).populate('categories');
 
 	res.json(product);

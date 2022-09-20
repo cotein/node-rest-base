@@ -2,12 +2,11 @@ const {Router} = require('express');
 const { check } = require('express-validator');
 
 const { fieldValidation, isAdminRole, validateJWT} = require('../middlewares');
-const {ExistsCategoryById} = require('../helpers/db-validators');
-const {
-} = require('../controllers/company.controller');
+
+const { createCompany } = require('../controllers/company.controller');
+const { ExistsCompanyOnDataBase } = require('../helpers/db-validators');
 
 const router = Router();
-
 
 //obtener una categoria - público
 /* router.get('/:id', [
@@ -17,13 +16,13 @@ const router = Router();
 	fieldValidation
 ], getCompany); */
 
-//crear una categoria - privado - cualquier rol
-/* router.post('/', [
+//crear una companía - privado - cualquier rol
+router.post('/', [
 	validateJWT,
-	//check('id').custom(ExistsCompanyById),
+	check('name').custom(ExistsCompanyOnDataBase),
 	check('name', 'El nombre es obligatotio').not().isEmpty(),
 	fieldValidation
-], createCompany); */
+], createCompany);
 
 //actualizar una categoria - privado - cualquier rol
 /* router.put('/:id', [
