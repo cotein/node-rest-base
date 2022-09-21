@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const { response } = require('express');
-
+const { v4: uuidv4 } = require('uuid');
 const { User } = require('../models');
 const { generateJWT } = require('../helpers/generate-jwt');
 const { googleVerify } = require('../helpers/google-verify');
@@ -16,6 +16,12 @@ const login = async (req, res = response) => {
 			msg: 'Usuario / pass incorrectos - correo'
 		});
 	}
+
+	if (! user.validatedEmail) {
+        return res.status(400).send({
+          message: "Su email esta pendiente de validación",
+        });
+    }
 
 	//si el usuario esta activo
 	if (!user.status) {
@@ -82,7 +88,55 @@ const googleSignIn = async (req, res = response) => {
 	}
 };
 
+const register = async (req, res = response) => {
+
+	try {
+
+        // Obtener la data del usuario: name, email
+        const { name, email } = req.body;
+
+        // Verificar que el usuario no exista
+        let user = await User.findOne({ email }) || null;
+
+        if(user) {
+            return res.json({
+                success: false,
+                msg: 'Usuario ya existe'
+            });
+        }
+
+        // Generar el código
+        const codeVerificationEmail = uuidv4();
+
+        // Crear un nuevo usuario
+        user = new User({ name, email, codeVerificationEmail });
+
+        // Generar token
+        const token = generateJWT({ email, codeVerificationEmail });
+
+        // Obtener un template
+        const template = getTemplate(name, token);
+
+        // Enviar el email
+        await sendEmail(email, 'Este es un email de prueba', template);
+        await user.save();
+
+        res.json({
+            success: true,
+            msg: 'Registrado correctamente'
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            success: false,
+            msg: 'Error al registrar usuario'
+        });
+    }
+
+}
 module.exports = {
 	login,
-	googleSignIn
+	googleSignIn,
+	register
 };

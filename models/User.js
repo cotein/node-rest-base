@@ -20,7 +20,7 @@ const UserSchema = Schema({
 	},
 	role : {
 		type : String,
-		required : true
+		required : false
 	},
 	status : {
 		type : Boolean,
@@ -37,6 +37,10 @@ const UserSchema = Schema({
 	validatedEmail : {
 		type : Boolean,
 		default : false
+	},
+	codeVerificationEmail : {
+		type : String,
+		default : ''
 	},
 	company: {
 		type: Schema.Types.ObjectId,

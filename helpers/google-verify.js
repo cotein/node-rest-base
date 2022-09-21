@@ -10,9 +10,7 @@ async function googleVerify(token = '') {
 		//[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
 	});
 	const {name,  email, picture, family_name} = ticket.getPayload();
-	console.log('ticket.getPayload()');
-	console.log(ticket.getPayload());
-	console.log('ticket.getPayload()');
+
 	return {
 		name,
 		lastName : family_name,
