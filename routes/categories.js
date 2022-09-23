@@ -1,8 +1,8 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { fieldValidation, isAdminRole, validateJWT} = require('../middlewares');
-const {ExistsCategoryById} = require('../helpers/db-validators');
+const { fieldValidation, isAdminRole, validateJWT } = require('../middlewares');
+const { ExistsCategoryById } = require('../helpers/db-validators');
 const {
 	createCategory,
 	getCategory,
@@ -50,7 +50,7 @@ router.delete('/:id', [
 	check('id', 'No es un ID de Mongo').isMongoId(),
 	check('id').custom(ExistsCategoryById),
 	fieldValidation
-],deleteCategory);
+], deleteCategory);
 
 
 

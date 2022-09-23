@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
-const { User, Company, Product } = require('../models');
+const { Company } = require('../models');
 const Server = require('../models/Server');
-const { basicInitialData, authUser } = require('./helpers');
+const { basicInitialData } = require('./helpers');
 
 describe('Pruebas sobre la API company', () => {
 

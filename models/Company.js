@@ -121,6 +121,31 @@ const CompanySchema = Schema({
 			required : false
 		}
 	],
+	meliToken: {
+		type: Schema.Types.String,
+		required: false,
+		default: null
+	},
+	meliTokenType: {
+		type: Schema.Types.String,
+		required: false,
+		default: null
+	},
+	meliTokenExpiresIn: {
+		type: Schema.Types.Number,
+		required: false,
+		default: null
+	},
+	meliTokenScope: {
+		type: Schema.Types.String,
+		required: false,
+		default: null
+	},
+	meliUserId: {
+		type: Schema.Types.Number,
+		required: false,
+		default: null
+	},
 	createdat : { type : Date, default: Date.now }
 });
 
