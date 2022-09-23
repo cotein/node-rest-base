@@ -17,11 +17,11 @@ const login = async (req, res = response) => {
 		});
 	}
 
-	if (! user.validatedEmail) {
+	/* if (! user.validatedEmail) {
         return res.status(400).send({
           message: "Su email esta pendiente de validación",
         });
-    }
+    } */
 
 	//si el usuario esta activo
 	if (!user.status) {

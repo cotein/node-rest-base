@@ -12,6 +12,7 @@ class Server {
 		this.categorieisPath = '/api/categories';
 		this.productsPath = '/api/products';
 		this.companyPath = '/api/company';
+		this.meliPath = '/api/meli';
 		this.middlewares();
 		this.routes();
 	}
@@ -22,6 +23,8 @@ class Server {
 		this.app.use(this.categorieisPath, require('../routes/categories'));
 		this.app.use(this.productsPath, require('../routes/products'));
 		this.app.use(this.companyPath, require('../routes/company'));
+		this.app.use(this.meliPath, require('../routes/meli'));
+
 	}
 
 	middlewares() {
@@ -32,8 +35,8 @@ class Server {
 		this.app.use(express.json());
 
 		//db connection
-
 		this.dataBaseConnection();
+		
 		//Directorio Público
 		this.app.use(express.static('public'));
 	}
