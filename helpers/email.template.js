@@ -428,7 +428,7 @@ const getEmailTemplate = (name, token) => {
                                               </tr>
                                               <tr style="border-collapse:collapse">
                                                 <td style="padding:0;Margin:0;padding-bottom:20px;padding-top:40px" align="center">
-                                                  <span class="es-button-border" style="border-style:solid;border-color:#006AFF;background:#006AFF;border-width:0px;display:inline-block;border-radius:12px;width:auto"><a class="es-button" style="mso-style-priority: 100 !important; text-decoration: none !important; -webkit-text-size-adjust: none; -ms-text-size-adjust: none; mso-line-height-rule: exactly; font-family: poppins,sans-serif; font-size: 18px; color: #FFFFFF; border-style: solid; border-color: #006AFF; border-width: 15px 30px 15px 30px; display: inline-block; background: #006AFF; border-radius: 12px; font-weight: bold; font-style: normal; line-height: 22px; width: auto; text-align: center;" href="# ${token}" target="_blank">Confirmar email</a></span>
+                                                  <span class="es-button-border" style="border-style:solid;border-color:#006AFF;background:#006AFF;border-width:0px;display:inline-block;border-radius:12px;width:auto"><a class="es-button" style="mso-style-priority: 100 !important; text-decoration: none !important; -webkit-text-size-adjust: none; -ms-text-size-adjust: none; mso-line-height-rule: exactly; font-family: poppins,sans-serif; font-size: 18px; color: #FFFFFF; border-style: solid; border-color: #006AFF; border-width: 15px 30px 15px 30px; display: inline-block; background: #006AFF; border-radius: 12px; font-weight: bold; font-style: normal; line-height: 22px; width: auto; text-align: center;" href="http://localhost:9000/auth/confirm/${token}" target="_blank">Confirmar email</a></span>
                                                 </td>
                                               </tr>
                                               <tr style="border-collapse:collapse">
@@ -484,67 +484,7 @@ const getEmailTemplate = (name, token) => {
                                             </tbody>
                                           </table>
                                         </td>
-                                        <td class="esdev-mso-td" style="padding:0;Margin:0" valign="top">
-                                          <table class="es-left fbtb" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left" cellpadding="0" cellspacing="0" id="fbtb" align="left">
-                                            <tbody>
-                                              <tr style="border-collapse:collapse">
-                                                <td style="padding:0;Margin:0;width:30px" align="left">
-                                                  <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                    <tbody>
-                                                      <tr style="border-collapse:collapse">
-                                                        <td style="padding:0;Margin:0;padding-top:30px;font-size:0px" align="center">
-                                                          <a style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543" target="_blank" href="https://click.pstmrk.it/2sm/www.facebook.com%2Fzencastr/eNeEGCYN/Lt9E/kAsdnC5FJc/ZW1haWwtdmVyaWZpY2F0aW9u"><img class="adapt-img fbic" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" src="https://storage.googleapis.com/zencastr-prod-assets/email/images/fb.png" alt /></a>
-                                                        </td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                                </td>
-                                                <td style="padding:0;Margin:0;width:20px">
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </td>
-                                        <td class="esdev-mso-td" style="padding:0;Margin:0" valign="top">
-                                          <table class="es-left igtb" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left" cellpadding="0" cellspacing="0" id="igtb" align="left">
-                                            <tbody>
-                                              <tr style="border-collapse:collapse">
-                                                <td style="padding:0;Margin:0;width:30px" align="left">
-                                                  <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                    <tbody>
-                                                      <tr style="border-collapse:collapse">
-                                                        <td style="padding:0;Margin:0;padding-top:30px;font-size:0px" align="center">
-                                                          <a style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543" target="_blank" href="https://click.pstmrk.it/2sm/www.instagram.com%2Fzencastr/edeEGCYN/Lt9E/RlXBirl1gH/ZW1haWwtdmVyaWZpY2F0aW9u"><img class="adapt-img igic" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" src="https://storage.googleapis.com/zencastr-prod-assets/email/images/insta.png" alt /></a>
-                                                        </td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                                </td>
-                                                <td style="padding:0;Margin:0;width:20px">
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </td>
-                                        <td class="esdev-mso-td" style="padding:0;Margin:0" valign="top">
-                                          <table class="es-right twtb" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right" cellpadding="0" cellspacing="0" id="twtb" align="right">
-                                            <tbody>
-                                              <tr style="border-collapse:collapse">
-                                                <td style="padding:0;Margin:0;width:30px" align="left">
-                                                  <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px" cellpadding="0" cellspacing="0" width="100%" role="presentation">
-                                                    <tbody>
-                                                      <tr style="border-collapse:collapse">
-                                                        <td style="padding:0;Margin:0;padding-top:30px;font-size:0px" align="center">
-                                                          <a style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543" target="_blank" href="https://click.pstmrk.it/2sm/twitter.com%2Fzencastr/eteEGCYN/Lt9E/4l-QuPrNf0/ZW1haWwtdmVyaWZpY2F0aW9u"><img class="adapt-img twic" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" src="https://storage.googleapis.com/zencastr-prod-assets/email/images/tw.png" alt /></a>
-                                                        </td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </td>
+                                        
                                       </tr>
                                     </tbody>
                                   </table>
@@ -589,4 +529,8 @@ const getEmailTemplate = (name, token) => {
        </body>
     </html>
     `
+}
+
+module.exports = {
+  getEmailTemplate
 }

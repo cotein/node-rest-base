@@ -2,8 +2,10 @@ const bcryptjs = require('bcryptjs');
 const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { User } = require('../models');
-const { generateJWT } = require('../helpers/generate-jwt');
+const { generateJWT, getTokenData } = require('../helpers/generate-jwt');
 const { googleVerify } = require('../helpers/google-verify');
+const { getEmailTemplate } = require('../helpers/email.template');
+const { sendEmail } = require('../helpers/send.email');
 
 const login = async (req, res = response) => {
 
@@ -93,7 +95,12 @@ const register = async (req, res = response) => {
 	try {
 
         // Obtener la data del usuario: name, email
-        const { name, email } = req.body;
+        console.log("🚀 ~ file: auth.controller.js ~ line 97 ~ register ~ req.body", req.body)
+        const { name,
+				lastName,
+				email,
+				password 
+			} = req.body.userForm;
 
         // Verificar que el usuario no exista
         let user = await User.findOne({ email }) || null;
@@ -109,13 +116,23 @@ const register = async (req, res = response) => {
         const codeVerificationEmail = uuidv4();
 
         // Crear un nuevo usuario
-        user = new User({ name, email, codeVerificationEmail });
+		const userData = {
+			name,
+			lastName,
+			email,
+			password,
+			role: 'ADMIN_ROLE',
+			google: false,
+			codeVerificationEmail
+		};
+
+        user = new User(userData);
 
         // Generar token
         const token = generateJWT({ email, codeVerificationEmail });
 
         // Obtener un template
-        const template = getTemplate(name, token);
+        const template = getEmailTemplate(name, token);
 
         // Enviar el email
         await sendEmail(email, 'Este es un email de prueba', template);
@@ -127,7 +144,7 @@ const register = async (req, res = response) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.log("🚀 ~ file: auth.controller.js ~ line 130 ~ register ~ error", error)
         return res.json({
             success: false,
             msg: 'Error al registrar usuario'
@@ -135,8 +152,60 @@ const register = async (req, res = response) => {
     }
 
 }
+
+const confirm = async (req, res) => {
+    try {
+
+       // Obtener el token
+       const { token } = req.params;
+       
+       // Verificar la data
+       const data = await getTokenData(token);
+
+       if(data === null) {
+            return res.json({
+                success: false,
+                msg: 'Error al obtener data'
+            });
+       }
+
+       console.log("🚀 ~ file: auth.controller.js ~ line 173 ~ confirm ~ data", data)
+
+       const { email, code } = data.data;
+
+       // Verificar existencia del usuario
+       const user = await User.findOne({ email }) || null;
+
+       if(user === null) {
+            return res.json({
+                success: false,
+                msg: 'Usuario no existe'
+            });
+       }
+
+       // Verificar el código
+       if(code !== user.code) {
+            return res.redirect('/error.html');
+       }
+
+       // Actualizar usuario
+       user.status = 'VERIFIED';
+       await user.save();
+
+       // Redireccionar a la confirmación
+       return res.redirect('/confirm.html');
+        
+    } catch (error) {
+        console.log("🚀 ~ file: auth.controller.js ~ line 199 ~ confirm ~ error", error)
+        return res.json({
+            success: false,
+            msg: 'Error al confirmar usuario'
+        });
+    }
+}
 module.exports = {
 	login,
 	googleSignIn,
-	register
+	register,
+	confirm
 };
