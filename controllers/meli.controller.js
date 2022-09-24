@@ -25,9 +25,9 @@ const getMeliToken = async (req, res = response) => {
         
         if (data) {
             
+            console.log("🚀 ~ file: meli.controller.js ~ line 23 ~ getMeliToken ~ pp", data)
         }
           
-    console.log("🚀 ~ file: meli.controller.js ~ line 23 ~ getMeliToken ~ pp", data)
 } catch (error) {
     console.log("🚀 ~ file: meli.controller.js ~ line 37} ~ getMeliToken ~ error", JSON.parse(error.response))
         console.log("🚀 ~ file: meli.controller.js ~ line 28 ~ getMeliToken ~ error", error)
